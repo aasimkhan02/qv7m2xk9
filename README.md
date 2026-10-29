@@ -281,5 +281,7 @@ For an exhaustive technical breakdown covering:
 - Complete mathematical proofs and formula definitions
 - A ready-to-use technical presentation script
 
-See the comprehensive [TECHNICAL_DOCUMENTATION.md](file:///c:/Users/moidin/Desktop/GridBricks/TECHNICAL_DOCUMENTATION.md).
+## AI Usage Disclosure
+
+AI tools were used to assist with the development of this project. The README documentation was also generated with AI assistance.
 
