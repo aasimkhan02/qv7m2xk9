@@ -1,5 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000';
-const DEFAULT_TIMEOUT_MS = 10000;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://qv7m2xk9.onrender.com';const DEFAULT_TIMEOUT_MS = 10000;
 
 async function request(endpoint, options = {}) {
   const url = `${API_BASE_URL}${endpoint}`;

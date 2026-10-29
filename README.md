@@ -10,13 +10,13 @@
 2. [Key Evaluation Results](#key-evaluation-results)
 3. [Architecture & System Design](#architecture--system-design)
 4. [Project Structure](#project-structure)
-5. [Quickstart Guide](#quickstart-guide)
+5. [Docker Deployment (Recommended)](#docker-deployment-recommended)
+6. [Manual Quickstart Guide](#manual-quickstart-guide)
    - [Backend Setup (FastAPI)](#backend-setup-fastapi)
    - [Frontend Setup (React + Vite)](#frontend-setup-react--vite)
-6. [API Reference](#api-reference)
-7. [Dashboard Components](#dashboard-components)
-8. [Testing & Verification](#testing--verification)
-9. [Technical Documentation](#technical-documentation)
+7. [API Reference](#api-reference)
+8. [Dashboard Components](#dashboard-components)
+9. [Testing & Verification](#testing--verification)
 
 ---
 
@@ -80,9 +80,11 @@ Evaluated across **744 continuous settlement hours** (31 delivery days $\times$ 
 
 ```text
 GridBricks/
+├── docker-compose.yml             # Docker Compose multi-container specification
 ├── README.md                      # Root system documentation (this file)
-├── TECHNICAL_DOCUMENTATION.md     # In-depth technical architecture document
 ├── backend/
+│   ├── Dockerfile                 # Python 3.11 backend container image
+│   ├── .dockerignore              # Backend build exclusions
 │   ├── main.py                    # FastAPI application, routing, CORS, LRU cache
 │   ├── analysis.py                # Pipeline: Ingestion, 11:00 UTC cutoff matching, metrics
 │   ├── requirements.txt           # Python dependencies
@@ -93,6 +95,9 @@ GridBricks/
 │       ├── wind_actuals_feb1.json
 │       └── wind_forecasts_jan2026.json
 └── frontend/
+    ├── Dockerfile                 # Multi-stage production container image (Node + Nginx)
+    ├── nginx.conf                 # Nginx web server configuration for SPA routing
+    ├── .dockerignore              # Frontend build exclusions
     ├── package.json               # Node dependencies & npm scripts
     ├── vite.config.js             # Vite build configuration
     ├── index.html                 # HTML entry point with fonts & metadata
@@ -121,7 +126,34 @@ GridBricks/
 
 ---
 
-## Quickstart Guide
+## Docker Deployment (Recommended)
+
+Run both the FastAPI backend and the React frontend with a single command using Docker Compose:
+
+### 1. Build and Start Containers
+```bash
+docker compose up -d --build
+```
+
+### 2. Follow Service Logs
+```bash
+docker compose logs -f
+```
+
+### 3. Access the Running Application
+- **Frontend Dashboard:** [http://localhost:5173](http://localhost:5173)
+- **FastAPI Backend:** [http://localhost:8000](http://localhost:8000)
+- **Interactive Swagger API Docs:** [http://localhost:8000/docs](http://localhost:8000/docs)
+- **API Healthcheck:** [http://localhost:8000/health](http://localhost:8000/health)
+
+### 4. Stop Containers
+```bash
+docker compose down
+```
+
+---
+
+## Manual Quickstart Guide
 
 ### Backend Setup (FastAPI)
 
@@ -272,16 +304,6 @@ npm run build     # Runs Vite production build
 
 ---
 
-## Technical Documentation
-
-For an exhaustive technical breakdown covering:
-- Elexon BMRS raw schema definitions
-- Timestamp floor resampling mathematical logic
-- The 11:00 UTC day-ahead cutoff algorithm
-- Complete mathematical proofs and formula definitions
-- A ready-to-use technical presentation script
-
 ## AI Usage Disclosure
 
 AI tools were used to assist with the development of this project. The README documentation was also generated with AI assistance.
-
