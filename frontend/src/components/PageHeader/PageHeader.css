@@ -1,0 +1,19 @@
+.clean-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px 0 8px;
+}
+
+.clean-page-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.clean-page-sub {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
